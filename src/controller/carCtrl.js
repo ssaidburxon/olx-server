@@ -21,7 +21,6 @@ const Car = require("../model/carModel");
 const carCtrl = {
   add: async (req, res) => {
     const { token } = req.headers;
-    console.log(req.body);
     try {
       if (!token) {
         return res.status(403).json({ message: "Token is required" });
@@ -29,6 +28,7 @@ const carCtrl = {
       if (req.files) {
         let images = [];
         const { image } = req.files;
+        console.log(image);
         if (image?.length > 0) {
           for (const img of image) {
             const format = img.mimetype.split("/")[1];
@@ -82,6 +82,7 @@ const carCtrl = {
   get: async (req, res) => {
     try {
       const cars = await Car.find();
+      console.log(cars);
       res.status(200).json({ message: "All Cars", getAll: cars });
     } catch (error) {
       res.status(503).json({ message: error.message });
