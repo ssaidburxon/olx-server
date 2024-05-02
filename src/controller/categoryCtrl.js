@@ -38,8 +38,11 @@ const categoryCtrl = {
     },
     get: async (req, res) => {
         try {
+            console.log('ok');
             const categorys = await Category.find();
-            res.status(200).json({ message: 'Categorys', categorys })
+            console.log(categorys);
+
+           return res.status(200).json({ message: 'Categorys', categorys })
         } catch (error) {
             res.status(503).json({ message: error.message })
         }
