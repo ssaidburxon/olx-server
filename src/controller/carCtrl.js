@@ -28,7 +28,6 @@ const carCtrl = {
       if (req.files) {
         let images = [];
         const { image } = req.files;
-        console.log(image);
         if (image?.length > 0) {
           for (const img of image) {
             const format = img.mimetype.split("/")[1];
@@ -50,6 +49,7 @@ const carCtrl = {
             };
             images.push(imag);
           }
+          console.log(images);
           req.body.photos = images;
         } else {
           const format = image.mimetype.split("/")[1];
