@@ -12,7 +12,6 @@ const categoryCtrl = {
         try {
             if (req.files) {
                 const { image } = req.files;
-                console.log(image);
                 const format = image.mimetype.split('/')[1];
                 if (format !== 'png' && format !== 'jpeg') {
                     return res.status(403).json({ message: 'fill eformat incorrect' })
@@ -38,11 +37,8 @@ const categoryCtrl = {
     },
     get: async (req, res) => {
         try {
-            console.log('ok');
             const categorys = await Category.find();
-            console.log(categorys);
-
-           return res.status(200).json({ message: 'Categorys', categorys })
+            return res.status(200).json({ message: 'Categorys', categorys })
         } catch (error) {
             res.status(503).json({ message: error.message })
         }
