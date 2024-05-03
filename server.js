@@ -3,6 +3,7 @@ const fileUpload = require("express-fileupload")
 const cors = require("cors")
 const dotenv = require("dotenv")
 const socketIo = require("socket.io")
+const http = require('http')
 const cloudinary = require("cloudinary")
 const mongoose = require("mongoose")
 
@@ -22,6 +23,15 @@ const workRouter = require("./src/router/workRouter")
 const app = express()
 const PORT = process.env.PORT || 4001
 
+const server = http.createServer(app)
+const io = socketIo(server, {
+    cors: {
+        origin: "*",
+        // origin: "http://localhost:3000", 
+        // methods: ["GET", "POST"]
+    }
+})
+
 // cloudinary
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
@@ -35,7 +45,7 @@ app.use(express.static(path.join(__dirname, 'src', 'public')))
 // middleware
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(fileUpload({useTempFiles: true}))
+app.use(fileUpload({ useTempFiles: true }))
 app.use(cors())
 
 const MONGO_URL = process.env.MONGO_URL
@@ -53,6 +63,31 @@ app.use('/api/sub', subRouter)
 app.use('/api/type', typeRouter)
 app.use('/api/', fashionRouter)
 app.use('/api/', workRouter)
+
+// websocket functions
+let activeUsers = [];
+
+io.on("connection", (socket) => {
+    socket.on("new-user-added", (newUserId) => {
+        if (!activeUsers.some((user) => user.userId === newUserId)) {
+            activeUsers.push({ userId: newUserId, socketId: socket.id });
+        }
+
+        io.emit("get-users", activeUsers);
+    });
+
+    socket.on("disconnect", () => {
+        activeUsers = activeUsers.filter((user) => user.socketId !== socket.id);
+
+        io.emit("get-users", activeUsers);
+    });
+
+    socket.on("exit", (id) => {
+        activeUsers = activeUsers.filter((user) => user.userId !== id);
+
+        io.emit("get-users", activeUsers);
+    });
+});
 
 mongoose.connect(MONGO_URL, {})
     .then(() => {
