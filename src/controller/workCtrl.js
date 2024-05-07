@@ -17,6 +17,8 @@ const removeTemp = (pathes) => {
 };
 
 const Work = require("../model/workModel")
+const Fashion = require("../model/fashionModel")
+const Car = require("../model/carModel")
 
 const workCtrl = {
   add: async (req, res) => {

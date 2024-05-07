@@ -64,7 +64,7 @@ app.use('/api/sub', subRouter)
 app.use('/api/type', typeRouter)
 app.use('/api/chat', chatRouter)
 app.use('/api/message', messageRouter)
-app.use('/api/car', carRouter)
+app.use('/api/', carRouter)
 app.use('/api/', fashionRouter)
 app.use('/api/', workRouter)
 
