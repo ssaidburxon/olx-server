@@ -19,6 +19,8 @@ const subRouter = require("./src/router/subRouter")
 const typeRouter = require("./src/router/typeRouter")
 const fashionRouter = require("./src/router/fashionRouter")
 const workRouter = require("./src/router/workRouter")
+const chatRouter = require("./src/router/chatRouter")
+const messageRouter = require("./src/router/messageRouter")
 
 const app = express()
 const PORT = process.env.PORT || 4001
@@ -61,6 +63,8 @@ app.use('/api/category', categoryRouter)
 app.use('/api/car', carRouter)
 app.use('/api/sub', subRouter)
 app.use('/api/type', typeRouter)
+app.use('/api/chat', chatRouter)
+app.use('/api/message', messageRouter)
 app.use('/api/', fashionRouter)
 app.use('/api/', workRouter)
 
