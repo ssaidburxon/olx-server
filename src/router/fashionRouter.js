@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const fasionCtrl = require('../controller/fashionCtrl');
+const fashionCtrl = require('../controller/fashionCtrl');
 
 
-router.post('/fashion', fasionCtrl.add);
-router.get('/fashion', fasionCtrl.get);
-router.get('/fashions/:id', fasionCtrl.getOne);
-router.put('/fashion/:carId', fasionCtrl.update);
-router.delete('/fashion/:carId', fasionCtrl.delete);
+router.post('/fashion', fashionCtrl.add);
+router.get('/fashion', fashionCtrl.get);
+router.get('/fashions/:id', fashionCtrl.getOne);
+router.get('/fashion/similar', fashionCtrl.similar)
+router.put('/fashion/:carId', fashionCtrl.update);
+router.delete('/fashion/:carId', fashionCtrl.delete);
 
 module.exports = router

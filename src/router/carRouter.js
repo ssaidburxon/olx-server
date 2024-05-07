@@ -6,6 +6,7 @@ const carCtrl = require('../controller/carCtrl');
 router.post('/', carCtrl.add);
 router.get('/', carCtrl.get);
 router.get('/:id', carCtrl.getOne);
+router.get('/similar', carCtrl.similar)
 router.put('/:id', carCtrl.update);
 router.delete('/:id', carCtrl.delete);
 
