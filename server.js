@@ -60,11 +60,11 @@ app.get('/', (req, res) => {
 app.use('/api/auth', authRouter)
 app.use('/api/user', userRouter)
 app.use('/api/category', categoryRouter)
-app.use('/api/car', carRouter)
 app.use('/api/sub', subRouter)
 app.use('/api/type', typeRouter)
 app.use('/api/chat', chatRouter)
 app.use('/api/message', messageRouter)
+app.use('/api/car', carRouter)
 app.use('/api/', fashionRouter)
 app.use('/api/', workRouter)
 
