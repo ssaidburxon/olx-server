@@ -8,6 +8,6 @@ router.get('/fashion', fashionCtrl.get);
 router.get('/fashions/:id', fashionCtrl.getOne);
 router.get('/fashion/similar', fashionCtrl.similar)
 router.put('/fashion/:carId', fashionCtrl.update);
-router.delete('/fashion/:carId', fashionCtrl.delete);
+router.delete('/fashion/:fashionId', fashionCtrl.delete);
 
 module.exports = router

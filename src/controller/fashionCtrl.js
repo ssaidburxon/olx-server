@@ -55,7 +55,6 @@ const fashionCtrl = {
                     req.body.photos = images;
                 } else {
                     const format = image.mimetype.split("/")[1];
-                    console.log('ok');
                     if (format !== "png" && format !== "jpeg") {
                         return res.status(403).json({ message: "File format incorrect" });
                     }
@@ -169,7 +168,7 @@ const fashionCtrl = {
         }
 
         try {
-            const deleteGall = await Car.findByIdAndDelete(id);
+            const deleteGall = await Fashion.findByIdAndDelete(id);
             if (!deleteGall) {
                 return res.status(400).send({ message: "Gallary not found" });
             }
